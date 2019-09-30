@@ -5,7 +5,7 @@ import TodoItem from './TodoItem';
 export default function TodoList({ items, showState, onItemActive, onItemComplete, onItemRemove, onItemDrag }) {
 	const renderList = (children, props) => {
 		return (
-			<ul {...props} style={{ listStyleType: 'none' }}>
+			<ul {...props} style={{ listStyleType: 'none', paddingInlineStart: '0px', width: '100%' }}>
 				{children}
 			</ul>
 		);

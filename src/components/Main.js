@@ -96,7 +96,10 @@ export default function Main({ isMobile, items, onAddItem, onComplete, onActive,
 				}}
 			>
 				<Segment vertical>{renderRows()}</Segment>
-				<Container style={{ height: '90%', overflowY: 'auto', padding: '2em 1em' }}>
+				<Container
+					fluid
+					style={{ height: '90%', overflowY: 'auto', padding: isMobile ? '2em .5em' : '2em 5em' }}
+				>
 					<TodoList
 						items={items}
 						showState={currentMenuItem}

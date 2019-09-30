@@ -32,7 +32,7 @@ export default function TodoItem({ item, index, onComplete, onActive, onRemove }
 			<Segment
 				clearing
 				color={item.state === 'active' ? 'yellow' : 'green'}
-				style={{ marginTop: 10, marginRight: 35, textDecorationLine: isComplete ? 'line-through' : null }}
+				style={{ marginTop: 10, textDecorationLine: isComplete ? 'line-through' : null }}
 			>
 				<Button
 					active={isComplete}
