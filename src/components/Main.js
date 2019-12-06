@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Segment, Input, Icon, Grid, Container, Ref } from 'semantic-ui-react';
 import TodoList from './TodoList';
 import Sorter from './Sorter';
-export default function Main({ isMobile, items, onAddItem, onComplete, onActive, onRemove, onDrag }) {
+export default function Main({ isMobile, items, onAddItem, onComplete, onActive, onRemove, onDrag, onPriorityChange }) {
 	const [ inputVal, setInputVal ] = useState('');
 
 	const [ currentMenuItem, setCurrentMenuItem ] = useState('all');
@@ -11,7 +11,7 @@ export default function Main({ isMobile, items, onAddItem, onComplete, onActive,
 
 	const onAdd = () => {
 		if (inputVal.replace(/ /g, '')) {
-			onAddItem(items, { name: inputVal, state: 'active' });
+			onAddItem(items, { name: inputVal, state: 'active', priority: 'medium' });
 		}
 		setInputVal('');
 	};
@@ -107,6 +107,7 @@ export default function Main({ isMobile, items, onAddItem, onComplete, onActive,
 						onItemComplete={(index) => onComplete(index)}
 						onItemActive={(index) => onActive(index)}
 						onItemDrag={(arrayMove, from, to) => onDrag(arrayMove, from, to)}
+						onPriorityChange={onPriorityChange}
 					/>
 				</Container>
 			</Segment>

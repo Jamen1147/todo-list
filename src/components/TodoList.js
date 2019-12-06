@@ -2,7 +2,15 @@ import React from 'react';
 import { List, arrayMove } from 'react-movable';
 import TodoItem from './TodoItem';
 
-export default function TodoList({ items, showState, onItemActive, onItemComplete, onItemRemove, onItemDrag }) {
+export default function TodoList({
+	items,
+	showState,
+	onItemActive,
+	onItemComplete,
+	onItemRemove,
+	onItemDrag,
+	onPriorityChange
+}) {
 	const renderList = (children, props) => {
 		return (
 			<ul {...props} style={{ listStyleType: 'none', paddingInlineStart: '0px', width: '100%' }}>
@@ -21,6 +29,7 @@ export default function TodoList({ items, showState, onItemActive, onItemComplet
 						onComplete={onItemComplete}
 						onActive={onItemActive}
 						onRemove={onItemRemove}
+						onPriorityChange={onPriorityChange}
 					/>
 				</li>
 			);

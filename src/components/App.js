@@ -2,31 +2,48 @@ import React, { useState } from 'react';
 import { Responsive } from 'semantic-ui-react';
 import Main from './Main';
 
+import { localStore } from '../localStorage';
+
 export default function App() {
-	const initItems = [ { name: 'Do homeworks', state: 'complete' }, { name: 'Coding', state: 'active' } ];
-	const [ items, setItems ] = useState(initItems);
+	const initItems = [
+		{ name: 'Do homeworks', state: 'complete', priority: 'high' },
+		{ name: 'Coding', state: 'active', priority: 'medium' }
+	];
+	const [ items, setItems ] = useState(localStore.getItems() || initItems);
 
 	const onItemComplete = (index) => {
 		items[index].state = 'complete';
 		setItems([ ...items ]);
+		localStore.setItems([ ...items ]);
 	};
 
 	const onItemActive = (index) => {
 		items[index].state = 'active';
 		setItems([ ...items ]);
+		localStore.setItems([ ...items ]);
 	};
 
 	const onItemRemove = (index) => {
 		items.splice(index, 1);
 		setItems([ ...items ]);
+		localStore.setItems([ ...items ]);
 	};
 
 	const onItemDrag = (arrayMove, from, to) => {
-		setItems(arrayMove(items, from, to));
+		const result = arrayMove(items, from, to);
+		setItems(result);
+		localStore.setItems(result);
 	};
 
 	const onAdd = (items, toAdd) => {
 		setItems([ ...items, toAdd ]);
+		localStore.setItems([ ...items, toAdd ]);
+	};
+
+	const onPriorityChange = (index, priority) => {
+		items[index].priority = priority;
+		setItems([ ...items ]);
+		localStore.setItems([ ...items ]);
 	};
 
 	const getWidth = () => {
@@ -43,6 +60,7 @@ export default function App() {
 					onDrag={onItemDrag}
 					onRemove={onItemRemove}
 					onAddItem={onAdd}
+					onPriorityChange={onPriorityChange}
 				/>
 			</Responsive>
 			<Responsive getWidth={getWidth} maxWidth={Responsive.onlyMobile.maxWidth} style={{ height: '100%' }}>
@@ -54,6 +72,7 @@ export default function App() {
 					onDrag={onItemDrag}
 					onRemove={onItemRemove}
 					onAddItem={onAdd}
+					onPriorityChange={onPriorityChange}
 				/>
 			</Responsive>
 		</React.Fragment>
